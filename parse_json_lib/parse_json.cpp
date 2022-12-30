@@ -225,7 +225,7 @@ parse_array(std::vector<JSONToken> tokens, int index) {
     auto t = tokens[index];
     if (t.type == JSONTokenType::Syntax) {
       if (t.value == "]") {
-        return {children, index, ""};
+        return {children, index + 1, ""};
       }
 
       if (t.value == ",") {
@@ -362,7 +362,7 @@ std::string deparse(JSONValue v, const std::string& whitespace) {
   case JSONValueType::String:
     return "\"" + v.string.value() + "\"";
   case JSONValueType::Boolean:
-    return (v.boolean.value() ? "false" : "true");
+    return (v.boolean.value() ? "true" : "false");
   case JSONValueType::Number:
     return std::to_string(v.number.value());
   case JSONValueType::Null:
